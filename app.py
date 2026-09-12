@@ -728,8 +728,8 @@ def render_result():
                 st.session_state.ai_explanation = generate_ai_explanation(result)
                 st.rerun()
             except Exception:
-                st.warning("AI explanation is unavailable. Add GROQ_API_KEY in Streamlit Secrets or the environment.")
-    st.markdown("### Package Details")
+    except Exception as e:
+        st.error(f"AI explanation failed: {type(e).__name__}: {e}")
     details = {
         "Package": package.get("name"), "Ecosystem": package.get("manager"), "Version": package.get("version"),
         "Author / maintainer": package.get("author"), "Description": package.get("description"),
