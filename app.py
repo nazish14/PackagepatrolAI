@@ -25,20 +25,22 @@ st.set_page_config(
 # -----------------------------
 
 
+
 def inject_css():
     st.markdown(
         """
         <style>
 
         /* =====================================================
-           PACKAGEPATROL AI — BLACK & GOLD THEME
+           PACKAGEPATROL AI
+           BLACK & GOLD CYBER SECURITY UI
            ===================================================== */
 
         :root {
             --pp-bg: #050505;
             --pp-panel: #11100C;
             --pp-panel2: #19170F;
-            --pp-border: #39301A;
+            --pp-border: #3B3018;
 
             --pp-gold: #FFD23F;
             --pp-gold-light: #FFE58A;
@@ -48,19 +50,21 @@ def inject_css():
             --pp-muted: #AAA597;
         }
 
-        /* ================= MAIN BACKGROUND ================= */
+        /* =====================================================
+           MAIN APPLICATION BACKGROUND
+           ===================================================== */
 
         .stApp {
             background:
                 radial-gradient(
                     circle at 50% -10%,
-                    rgba(255, 210, 63, 0.15),
-                    transparent 45%
+                    rgba(255, 210, 63, 0.16),
+                    transparent 42%
                 ),
                 linear-gradient(
                     135deg,
                     #050505 0%,
-                    #0A0906 55%,
+                    #0B0905 55%,
                     #050505 100%
                 );
 
@@ -68,93 +72,146 @@ def inject_css():
         }
 
         [data-testid="stHeader"] {
-            background: transparent;
+            background: transparent !important;
         }
 
-        /* ================= SIDEBAR BACKGROUND ================= */
+        /* =====================================================
+           BACKGROUND LOCK + CODE DESIGN
+           ===================================================== */
+
+        .pp-security-background {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.85;
+        }
+
+        /* Lock in the background */
+
+        .pp-background-lock {
+            position: absolute;
+            top: 50%;
+            left: 58%;
+            transform: translate(-50%, -50%);
+
+            font-size: clamp(180px, 30vw, 430px);
+            line-height: 1;
+
+            filter:
+                drop-shadow(0 0 25px rgba(255, 210, 63, 0.15))
+                drop-shadow(0 0 80px rgba(255, 210, 63, 0.08));
+
+            opacity: 0.12;
+            user-select: none;
+        }
+
+        /* Decorative code layer */
+
+        .pp-background-code {
+            position: absolute;
+            inset: 0;
+
+            color: #FFD23F;
+            font-family: "Courier New", monospace;
+            font-size: 11px;
+            line-height: 1.9;
+            letter-spacing: 3px;
+            word-break: break-all;
+
+            opacity: 0.065;
+            overflow: hidden;
+
+            mask-image: radial-gradient(
+                ellipse at center,
+                black 0%,
+                transparent 72%
+            );
+            -webkit-mask-image: radial-gradient(
+                ellipse at center,
+                black 0%,
+                transparent 72%
+            );
+        }
+
+        /* Keep application content above the background */
+
+        .stApp > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =====================================================
+           SIDEBAR — BLACK AND GOLD
+           ===================================================== */
 
         [data-testid="stSidebar"] {
             background:
                 linear-gradient(
                     180deg,
-                    #151208 0%,
-                    #090806 45%,
+                    #171208 0%,
+                    #0A0906 45%,
                     #050505 100%
                 ) !important;
 
             border-right: 1px solid #5C4817 !important;
         }
 
-        /* Sidebar inner content */
-
         [data-testid="stSidebar"] > div:first-child {
             background: transparent !important;
         }
 
-        /* Sidebar title */
-
         [data-testid="stSidebar"] h1,
         [data-testid="stSidebar"] h2,
         [data-testid="stSidebar"] h3 {
-            color: #FFD23F !important;
+            color: var(--pp-gold) !important;
         }
-
-        /* Sidebar normal text */
 
         [data-testid="stSidebar"] p,
         [data-testid="stSidebar"] .stCaption {
             color: #BEB6A3 !important;
         }
 
-        /* ================= SIDEBAR MENU ================= */
-
-        /* Navigation container */
+        /* Sidebar navigation container */
 
         [data-testid="stSidebar"] [role="radiogroup"] {
             gap: 8px !important;
         }
 
-        /* Every menu item */
+        /* Every navigation item */
 
         [data-testid="stSidebar"] [role="radiogroup"] label {
             display: flex !important;
             align-items: center !important;
-            gap: 10px !important;
 
             padding: 12px 14px !important;
-            margin: 3px 0 !important;
+            margin: 4px 0 !important;
 
             border: 1px solid transparent !important;
             border-radius: 12px !important;
 
             background: transparent !important;
-
             color: #C8C0AD !important;
+
             font-weight: 600 !important;
-
-            transition:
-                background 0.2s ease,
-                border-color 0.2s ease,
-                color 0.2s ease;
+            transition: all 0.2s ease;
         }
-
-        /* Menu item text */
 
         [data-testid="stSidebar"] [role="radiogroup"] label p {
             color: #C8C0AD !important;
             font-size: 0.95rem !important;
         }
 
-        /* Hover effect */
+        /* Hover */
 
         [data-testid="stSidebar"] [role="radiogroup"] label:hover {
             background: #211B0C !important;
             border-color: #6B541A !important;
-            color: #FFD23F !important;
         }
 
         [data-testid="stSidebar"] [role="radiogroup"] label:hover p {
-            color: #FFD23F !important;
+            color: var(--pp-gold) !important;
         }
 
         /* Selected menu item */
@@ -165,40 +222,33 @@ def inject_css():
                 linear-gradient(
                     90deg,
                     #4A350D 0%,
-                    #2A210C 100%
+                    #211A0B 100%
                 ) !important;
 
             border: 1px solid #B8860B !important;
 
-            color: #FFD23F !important;
-
             box-shadow:
-                inset 3px 0 0 #FFD23F,
-                0 0 12px rgba(255, 210, 63, 0.06);
+                inset 3px 0 0 var(--pp-gold),
+                0 0 15px rgba(255, 210, 63, 0.08);
         }
-
-        /* Selected menu text */
 
         [data-testid="stSidebar"] [role="radiogroup"]
         label:has(input:checked) p {
-            color: #FFD23F !important;
+            color: var(--pp-gold) !important;
             font-weight: 800 !important;
         }
 
-        /* Radio button accent */
-
-        [data-testid="stSidebar"] [role="radiogroup"]
-        input[type="radio"] {
-            accent-color: #FFD23F !important;
+        [data-testid="stSidebar"] input[type="radio"] {
+            accent-color: var(--pp-gold) !important;
         }
-
-        /* ================= SIDEBAR DIVIDERS ================= */
 
         [data-testid="stSidebar"] hr {
             border-color: #39301A !important;
         }
 
-        /* ================= TYPOGRAPHY ================= */
+        /* =====================================================
+           TEXT
+           ===================================================== */
 
         h1, h2, h3, h4 {
             color: var(--pp-text);
@@ -222,7 +272,9 @@ def inject_css():
             color: var(--pp-muted);
         }
 
-        /* ================= HERO ================= */
+        /* =====================================================
+           HERO — GOLDEN GLOW
+           ===================================================== */
 
         .pp-hero {
             padding: 2rem 2.2rem;
@@ -245,7 +297,9 @@ def inject_css():
             margin-bottom: 1.25rem;
         }
 
-        /* ================= CARDS ================= */
+        /* =====================================================
+           CARDS
+           ===================================================== */
 
         .pp-card,
         .pp-kpi {
@@ -275,7 +329,20 @@ def inject_css():
             margin-top: 0.2rem;
         }
 
-        /* ================= RISK BADGES ================= */
+        /* =====================================================
+           RISK SCORE
+           ===================================================== */
+
+        .pp-score {
+            font-size: 3.7rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--pp-gold);
+        }
+
+        /* =====================================================
+           RISK BADGES
+           ===================================================== */
 
         .pp-badge {
             display: inline-block;
@@ -305,16 +372,9 @@ def inject_css():
             background: #3B2C0D;
         }
 
-        /* ================= SCORE ================= */
-
-        .pp-score {
-            font-size: 3.7rem;
-            font-weight: 900;
-            line-height: 1;
-            color: var(--pp-gold);
-        }
-
-        /* ================= BUTTONS ================= */
+        /* =====================================================
+           BUTTONS — GOLD
+           ===================================================== */
 
         div.stButton > button {
             border-radius: 10px;
@@ -343,7 +403,9 @@ def inject_css():
             color: #000000;
         }
 
-        /* ================= INPUTS ================= */
+        /* =====================================================
+           INPUTS
+           ===================================================== */
 
         .stTextInput input,
         .stSelectbox div[data-baseweb="select"] {
@@ -357,7 +419,9 @@ def inject_css():
             box-shadow: 0 0 0 1px var(--pp-gold) !important;
         }
 
-        /* ================= PROGRESS ================= */
+        /* =====================================================
+           PROGRESS BAR
+           ===================================================== */
 
         .stProgress > div > div > div > div {
             background: linear-gradient(
@@ -368,7 +432,9 @@ def inject_css():
             );
         }
 
-        /* ================= TABS & DIVIDERS ================= */
+        /* =====================================================
+           TABS AND DIVIDERS
+           ===================================================== */
 
         button[data-baseweb="tab"] {
             color: #BEB6A3 !important;
@@ -383,11 +449,37 @@ def inject_css():
         }
 
         </style>
+
+        <!-- Background lock and code pattern -->
+        <div class="pp-security-background">
+            <div class="pp-background-code">
+                010101 110010 101010 001101 111000 010101
+                101010 011001 110011 001010 111101 010010
+                110100 001111 101010 010101 111000 101011
+                011010 110101 001101 101010 010110 111001
+                101010 010101 110011 001101 111000 010101
+                110010 101010 001101 111000 010101 101010
+                011001 110011 001010 111101 010010 110100
+                001111 101010 010101 111000 101011 011010
+                110101 001101 101010 010110 111001 101010
+                010101 110011 001101 111000 010101 110010
+                101010 001101 111000 010101 101010 011001
+                110011 001010 111101 010010 110100 001111
+                101010 010101 111000 101011 011010 110101
+                001101 101010 010110 111001 101010 010101
+                110011 001101 111000 010101 110010 101010
+                001101 111000 010101 101010 011001 110011
+                001010 111101 010010 110100 001111 101010
+                010101 111000 101011 011010 110101 001101
+                101010 010110 111001 101010 010101 110011
+            </div>
+
+            <div class="pp-background-lock">🔒</div>
+        </div>
+
         """,
         unsafe_allow_html=True,
     )
-
-
 # -----------------------------
 # Database
 # -----------------------------
