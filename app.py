@@ -24,18 +24,18 @@ st.set_page_config(
 # Styling
 # -----------------------------
 
+
 def inject_css():
     st.markdown(
         """
         <style>
 
         /* =====================================================
-           PACKAGEPATROL AI — BLACK & GOLD CYBERSECURITY THEME
+           PACKAGEPATROL AI — BLACK & GOLD THEME
            ===================================================== */
 
         :root {
             --pp-bg: #050505;
-            --pp-bg-soft: #0B0B09;
             --pp-panel: #11100C;
             --pp-panel2: #19170F;
             --pp-border: #39301A;
@@ -48,15 +48,14 @@ def inject_css():
             --pp-muted: #AAA597;
         }
 
-        /* ================= MAIN APPLICATION ================= */
+        /* ================= MAIN BACKGROUND ================= */
 
         .stApp {
             background:
                 radial-gradient(
                     circle at 50% -10%,
-                    rgba(255, 210, 63, 0.16) 0%,
-                    rgba(255, 210, 63, 0.04) 24%,
-                    transparent 48%
+                    rgba(255, 210, 63, 0.15),
+                    transparent 45%
                 ),
                 linear-gradient(
                     135deg,
@@ -72,33 +71,131 @@ def inject_css():
             background: transparent;
         }
 
-        /* ================= SIDEBAR ================= */
+        /* ================= SIDEBAR BACKGROUND ================= */
 
         [data-testid="stSidebar"] {
             background:
                 linear-gradient(
                     180deg,
-                    #0B0A07 0%,
+                    #151208 0%,
+                    #090806 45%,
                     #050505 100%
                 ) !important;
 
-            border-right: 1px solid var(--pp-border);
+            border-right: 1px solid #5C4817 !important;
         }
 
-        [data-testid="stSidebar"] .stRadio label {
-            color: #E9E2CE !important;
-            font-weight: 600;
+        /* Sidebar inner content */
+
+        [data-testid="stSidebar"] > div:first-child {
+            background: transparent !important;
         }
 
-        [data-testid="stSidebar"] .stRadio label:hover {
-            color: var(--pp-gold) !important;
+        /* Sidebar title */
+
+        [data-testid="stSidebar"] h1,
+        [data-testid="stSidebar"] h2,
+        [data-testid="stSidebar"] h3 {
+            color: #FFD23F !important;
         }
 
-        /* Sidebar radio selection */
+        /* Sidebar normal text */
 
-        [data-testid="stSidebar"] .stRadio
-        div[role="radiogroup"] label[data-checked="true"] {
-            color: var(--pp-gold) !important;
+        [data-testid="stSidebar"] p,
+        [data-testid="stSidebar"] .stCaption {
+            color: #BEB6A3 !important;
+        }
+
+        /* ================= SIDEBAR MENU ================= */
+
+        /* Navigation container */
+
+        [data-testid="stSidebar"] [role="radiogroup"] {
+            gap: 8px !important;
+        }
+
+        /* Every menu item */
+
+        [data-testid="stSidebar"] [role="radiogroup"] label {
+            display: flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+
+            padding: 12px 14px !important;
+            margin: 3px 0 !important;
+
+            border: 1px solid transparent !important;
+            border-radius: 12px !important;
+
+            background: transparent !important;
+
+            color: #C8C0AD !important;
+            font-weight: 600 !important;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+        /* Menu item text */
+
+        [data-testid="stSidebar"] [role="radiogroup"] label p {
+            color: #C8C0AD !important;
+            font-size: 0.95rem !important;
+        }
+
+        /* Hover effect */
+
+        [data-testid="stSidebar"] [role="radiogroup"] label:hover {
+            background: #211B0C !important;
+            border-color: #6B541A !important;
+            color: #FFD23F !important;
+        }
+
+        [data-testid="stSidebar"] [role="radiogroup"] label:hover p {
+            color: #FFD23F !important;
+        }
+
+        /* Selected menu item */
+
+        [data-testid="stSidebar"] [role="radiogroup"]
+        label:has(input:checked) {
+            background:
+                linear-gradient(
+                    90deg,
+                    #4A350D 0%,
+                    #2A210C 100%
+                ) !important;
+
+            border: 1px solid #B8860B !important;
+
+            color: #FFD23F !important;
+
+            box-shadow:
+                inset 3px 0 0 #FFD23F,
+                0 0 12px rgba(255, 210, 63, 0.06);
+        }
+
+        /* Selected menu text */
+
+        [data-testid="stSidebar"] [role="radiogroup"]
+        label:has(input:checked) p {
+            color: #FFD23F !important;
+            font-weight: 800 !important;
+        }
+
+        /* Radio button accent */
+
+        [data-testid="stSidebar"] [role="radiogroup"]
+        input[type="radio"] {
+            accent-color: #FFD23F !important;
+        }
+
+        /* ================= SIDEBAR DIVIDERS ================= */
+
+        [data-testid="stSidebar"] hr {
+            border-color: #39301A !important;
         }
 
         /* ================= TYPOGRAPHY ================= */
@@ -125,7 +222,7 @@ def inject_css():
             color: var(--pp-muted);
         }
 
-        /* ================= HERO SECTION ================= */
+        /* ================= HERO ================= */
 
         .pp-hero {
             padding: 2rem 2.2rem;
@@ -146,23 +243,23 @@ def inject_css():
                 );
 
             margin-bottom: 1.25rem;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
         }
 
         /* ================= CARDS ================= */
 
-        .pp-card {
+        .pp-card,
+        .pp-kpi {
             background: rgba(17, 16, 12, 0.96);
             border: 1px solid var(--pp-border);
             border-radius: 15px;
+        }
+
+        .pp-card {
             padding: 1.15rem;
             min-height: 100%;
         }
 
         .pp-kpi {
-            background: rgba(17, 16, 12, 0.96);
-            border: 1px solid var(--pp-border);
-            border-radius: 14px;
             padding: 1rem 1.1rem;
         }
 
@@ -188,8 +285,6 @@ def inject_css():
             font-weight: 800;
         }
 
-        /* Keep security meanings unchanged */
-
         .pp-low {
             color: #86EFAC;
             background: #123B2A;
@@ -210,7 +305,7 @@ def inject_css():
             background: #3B2C0D;
         }
 
-        /* ================= RISK SCORE ================= */
+        /* ================= SCORE ================= */
 
         .pp-score {
             font-size: 3.7rem;
@@ -225,38 +320,30 @@ def inject_css():
             border-radius: 10px;
             border: 1px solid var(--pp-gold-dark);
 
-            background:
-                linear-gradient(
-                    180deg,
-                    #FFD84D 0%,
-                    #D9A900 100%
-                );
+            background: linear-gradient(
+                180deg,
+                #FFD84D 0%,
+                #D9A900 100%
+            );
 
             color: #080808;
             font-weight: 800;
             min-height: 42px;
-
-            box-shadow:
-                0 0 12px rgba(255, 210, 63, 0.08);
         }
 
         div.stButton > button:hover {
             border-color: var(--pp-gold-light);
 
-            background:
-                linear-gradient(
-                    180deg,
-                    #FFE58A 0%,
-                    #EABF24 100%
-                );
+            background: linear-gradient(
+                180deg,
+                #FFE58A 0%,
+                #EABF24 100%
+            );
 
             color: #000000;
-
-            box-shadow:
-                0 0 18px rgba(255, 210, 63, 0.20);
         }
 
-        /* ================= INPUT FIELDS ================= */
+        /* ================= INPUTS ================= */
 
         .stTextInput input,
         .stSelectbox div[data-baseweb="select"] {
@@ -270,7 +357,7 @@ def inject_css():
             box-shadow: 0 0 0 1px var(--pp-gold) !important;
         }
 
-        /* ================= PROGRESS BAR ================= */
+        /* ================= PROGRESS ================= */
 
         .stProgress > div > div > div > div {
             background: linear-gradient(
@@ -281,7 +368,7 @@ def inject_css():
             );
         }
 
-        /* ================= TABS ================= */
+        /* ================= TABS & DIVIDERS ================= */
 
         button[data-baseweb="tab"] {
             color: #BEB6A3 !important;
@@ -290,8 +377,6 @@ def inject_css():
         button[data-baseweb="tab"][aria-selected="true"] {
             color: var(--pp-gold) !important;
         }
-
-        /* ================= DIVIDERS ================= */
 
         hr {
             border-color: var(--pp-border) !important;
