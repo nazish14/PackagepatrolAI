@@ -728,7 +728,7 @@ def render_result():
                 st.session_state.ai_explanation = generate_ai_explanation(result)
                 st.rerun()
             except Exception:
-    except Exception as e:
+            except Exception as e:
     st.error(f"AI explanation failed: {type(e).__name__}: {e}")
     details = {
         "Package": package.get("name"), "Ecosystem": package.get("manager"), "Version": package.get("version"),
