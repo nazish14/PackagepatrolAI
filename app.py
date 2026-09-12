@@ -722,14 +722,16 @@ def render_result():
     st.markdown("### 🤖 AI Security Explanation")
     if st.session_state.ai_explanation:
         st.markdown(st.session_state.ai_explanation)
-    elif st.button("Generate AI Explanation", key="ai_button"):
+       elif st.button("Generate AI Explanation", key="ai_button"):
         with st.spinner("Generating an evidence-based explanation…"):
             try:
                 st.session_state.ai_explanation = generate_ai_explanation(result)
                 st.rerun()
-            except Exception:
+
             except Exception as e:
-    st.error(f"AI explanation failed: {type(e).__name__}: {e}")
+                st.error(
+                    f"AI explanation failed: {type(e).__name__}: {e}"
+                )
     details = {
         "Package": package.get("name"), "Ecosystem": package.get("manager"), "Version": package.get("version"),
         "Author / maintainer": package.get("author"), "Description": package.get("description"),
