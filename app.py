@@ -31,7 +31,7 @@ def inject_css():
                 --pp-blue:#A78BFA; --pp-cyan:#C084FC; --pp-text:#F5F3FF; --pp-muted:#91a6bb; }
         .stApp { background: radial-gradient(circle at 85% 0%, #102b47 0%, #07111f 38%, #050b14 100%); color:var(--pp-text); }
         [data-testid="stHeader"] { background:transparent; }
-        [data-testid="stSidebar"] { background:#07111f; border-right:1px solid var(--pp-border); }
+        [data-testid="stSidebar"] { background:#100B1F; border-right:1px solid var(--pp-border); }
         [data-testid="stSidebar"] .stRadio label { color:#dbeafe !important; }
         h1,h2,h3,h4 { letter-spacing:-.025em; }
         .pp-muted { color:var(--pp-muted); }
