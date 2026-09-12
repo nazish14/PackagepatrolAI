@@ -23,36 +23,280 @@ st.set_page_config(
 # -----------------------------
 # Styling
 # -----------------------------
+
 def inject_css():
     st.markdown(
         """
         <style>
-        :root { --pp-bg:#100B1F; --pp-panel:#1B1230; --pp-panel2:#271844; --pp-border:#B8A9D1;
-                --pp-blue:#A78BFA; --pp-cyan:#C084FC; --pp-text:#F5F3FF; --pp-muted:#91a6bb; }
-        .stApp { background: radial-gradient(circle at 85% 0%, #102b47 0%, #07111f 38%, #050b14 100%); color:var(--pp-text); }
-        [data-testid="stHeader"] { background:transparent; }
-        [data-testid="stSidebar"] { background:#100B1F; border-right:1px solid var(--pp-border); }
-        [data-testid="stSidebar"] .stRadio label { color:#dbeafe !important; }
-        h1,h2,h3,h4 { letter-spacing:-.025em; }
-        .pp-muted { color:var(--pp-muted); }
-        .pp-hero { padding:2rem 2.2rem; border:1px solid #24496a; border-radius:18px;
-                   background:linear-gradient(135deg,#102943,#0b1a2b 65%,#0b2033); margin-bottom:1.25rem; }
-        .pp-eyebrow { color:var(--pp-cyan); text-transform:uppercase; font-size:.72rem; font-weight:800; letter-spacing:.14em; }
-        .pp-card { background:rgba(13,27,46,.92); border:1px solid var(--pp-border); border-radius:15px; padding:1.15rem; min-height:100%; }
-        .pp-kpi { background:rgba(13,27,46,.92); border:1px solid var(--pp-border); border-radius:14px; padding:1rem 1.1rem; }
-        .pp-kpi-label { color:var(--pp-muted); font-size:.82rem; }
-        .pp-kpi-value { color:#f8fbff; font-size:1.65rem; font-weight:800; margin-top:.2rem; }
-        .pp-badge { display:inline-block; padding:.25rem .65rem; border-radius:999px; font-size:.72rem; font-weight:800; }
-        .pp-low { color:#86efac; background:#123b2a; }
-        .pp-medium { color:#fcd34d; background:#4a3510; }
-        .pp-high { color:#fca5a5; background:#4a171d; }
-        .pp-info { color:#7dd3fc; background:#12344a; }
-        .pp-score { font-size:3.7rem; font-weight:900; line-height:1; color:#f8fbff; }
-        .pp-small { font-size:.82rem; color:var(--pp-muted); }
-        div.stButton > button { border-radius:10px; border:1px solid #28557a; background:#12395b; color:#effaff; font-weight:700; }
-        div.stButton > button:hover { border-color:var(--pp-cyan); background:#174c75; color:white; }
-        .stTextInput input, .stSelectbox div[data-baseweb="select"] { background:#0b1b2d; color:#f8fbff; }
-        .stProgress > div > div > div > div { background:linear-gradient(90deg,#22d3ee,#3b82f6); }
+
+        /* =====================================================
+           PACKAGEPATROL AI — BLACK & GOLD CYBERSECURITY THEME
+           ===================================================== */
+
+        :root {
+            --pp-bg: #050505;
+            --pp-bg-soft: #0B0B09;
+            --pp-panel: #11100C;
+            --pp-panel2: #19170F;
+            --pp-border: #39301A;
+
+            --pp-gold: #FFD23F;
+            --pp-gold-light: #FFE58A;
+            --pp-gold-dark: #B8860B;
+
+            --pp-text: #FFFDF5;
+            --pp-muted: #AAA597;
+        }
+
+        /* ================= MAIN APPLICATION ================= */
+
+        .stApp {
+            background:
+                radial-gradient(
+                    circle at 50% -10%,
+                    rgba(255, 210, 63, 0.16) 0%,
+                    rgba(255, 210, 63, 0.04) 24%,
+                    transparent 48%
+                ),
+                linear-gradient(
+                    135deg,
+                    #050505 0%,
+                    #0A0906 55%,
+                    #050505 100%
+                );
+
+            color: var(--pp-text);
+        }
+
+        [data-testid="stHeader"] {
+            background: transparent;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        [data-testid="stSidebar"] {
+            background:
+                linear-gradient(
+                    180deg,
+                    #0B0A07 0%,
+                    #050505 100%
+                ) !important;
+
+            border-right: 1px solid var(--pp-border);
+        }
+
+        [data-testid="stSidebar"] .stRadio label {
+            color: #E9E2CE !important;
+            font-weight: 600;
+        }
+
+        [data-testid="stSidebar"] .stRadio label:hover {
+            color: var(--pp-gold) !important;
+        }
+
+        /* Sidebar radio selection */
+
+        [data-testid="stSidebar"] .stRadio
+        div[role="radiogroup"] label[data-checked="true"] {
+            color: var(--pp-gold) !important;
+        }
+
+        /* ================= TYPOGRAPHY ================= */
+
+        h1, h2, h3, h4 {
+            color: var(--pp-text);
+            letter-spacing: -0.025em;
+        }
+
+        .pp-muted {
+            color: var(--pp-muted);
+        }
+
+        .pp-eyebrow {
+            color: var(--pp-gold);
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+        }
+
+        .pp-small {
+            font-size: 0.82rem;
+            color: var(--pp-muted);
+        }
+
+        /* ================= HERO SECTION ================= */
+
+        .pp-hero {
+            padding: 2rem 2.2rem;
+            border: 1px solid #6B541A;
+            border-radius: 18px;
+
+            background:
+                radial-gradient(
+                    circle at 85% 0%,
+                    rgba(255, 210, 63, 0.18),
+                    transparent 42%
+                ),
+                linear-gradient(
+                    135deg,
+                    #211B0C 0%,
+                    #0F0E09 65%,
+                    #080808 100%
+                );
+
+            margin-bottom: 1.25rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        /* ================= CARDS ================= */
+
+        .pp-card {
+            background: rgba(17, 16, 12, 0.96);
+            border: 1px solid var(--pp-border);
+            border-radius: 15px;
+            padding: 1.15rem;
+            min-height: 100%;
+        }
+
+        .pp-kpi {
+            background: rgba(17, 16, 12, 0.96);
+            border: 1px solid var(--pp-border);
+            border-radius: 14px;
+            padding: 1rem 1.1rem;
+        }
+
+        .pp-kpi-label {
+            color: var(--pp-muted);
+            font-size: 0.82rem;
+        }
+
+        .pp-kpi-value {
+            color: var(--pp-gold-light);
+            font-size: 1.65rem;
+            font-weight: 800;
+            margin-top: 0.2rem;
+        }
+
+        /* ================= RISK BADGES ================= */
+
+        .pp-badge {
+            display: inline-block;
+            padding: 0.25rem 0.65rem;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        /* Keep security meanings unchanged */
+
+        .pp-low {
+            color: #86EFAC;
+            background: #123B2A;
+        }
+
+        .pp-medium {
+            color: #FCD34D;
+            background: #4A3510;
+        }
+
+        .pp-high {
+            color: #FCA5A5;
+            background: #4A171D;
+        }
+
+        .pp-info {
+            color: var(--pp-gold-light);
+            background: #3B2C0D;
+        }
+
+        /* ================= RISK SCORE ================= */
+
+        .pp-score {
+            font-size: 3.7rem;
+            font-weight: 900;
+            line-height: 1;
+            color: var(--pp-gold);
+        }
+
+        /* ================= BUTTONS ================= */
+
+        div.stButton > button {
+            border-radius: 10px;
+            border: 1px solid var(--pp-gold-dark);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #FFD84D 0%,
+                    #D9A900 100%
+                );
+
+            color: #080808;
+            font-weight: 800;
+            min-height: 42px;
+
+            box-shadow:
+                0 0 12px rgba(255, 210, 63, 0.08);
+        }
+
+        div.stButton > button:hover {
+            border-color: var(--pp-gold-light);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #FFE58A 0%,
+                    #EABF24 100%
+                );
+
+            color: #000000;
+
+            box-shadow:
+                0 0 18px rgba(255, 210, 63, 0.20);
+        }
+
+        /* ================= INPUT FIELDS ================= */
+
+        .stTextInput input,
+        .stSelectbox div[data-baseweb="select"] {
+            background: #0D0C09 !important;
+            color: var(--pp-text) !important;
+            border-color: #51421D !important;
+        }
+
+        .stTextInput input:focus {
+            border-color: var(--pp-gold) !important;
+            box-shadow: 0 0 0 1px var(--pp-gold) !important;
+        }
+
+        /* ================= PROGRESS BAR ================= */
+
+        .stProgress > div > div > div > div {
+            background: linear-gradient(
+                90deg,
+                #B8860B,
+                #FFD23F,
+                #FFE58A
+            );
+        }
+
+        /* ================= TABS ================= */
+
+        button[data-baseweb="tab"] {
+            color: #BEB6A3 !important;
+        }
+
+        button[data-baseweb="tab"][aria-selected="true"] {
+            color: var(--pp-gold) !important;
+        }
+
+        /* ================= DIVIDERS ================= */
+
+        hr {
+            border-color: var(--pp-border) !important;
+        }
+
         </style>
         """,
         unsafe_allow_html=True,
