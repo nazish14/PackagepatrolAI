@@ -1,5 +1,5 @@
-import os
 import json
+import os
 import sqlite3
 from datetime import datetime, timezone
 
@@ -11,7 +11,14 @@ from analyzer import full_scan
 from risk_engine import risk_summary
 from utils import clean_package_name, package_url, valid_package_name
 
+# -----------------------------
+# Configuration & API Key Setup
+# -----------------------------
 DB_FILE = "packagepatrol.db"
+
+# Load API key from Streamlit Secrets or Environment Variables
+if "GROQ_API_KEY" in st.secrets:
+    os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
 
 st.set_page_config(
     page_title="PackagePatrol AI",
@@ -24,13 +31,10 @@ st.set_page_config(
 # -----------------------------
 # Styling
 # -----------------------------
-
-
 def inject_css():
     st.markdown(
         """
         <style>
-
         /* =====================================================
            PACKAGEPATROL AI — CYBERGUARD BLACK & GOLD UI
            ===================================================== */
@@ -444,6 +448,7 @@ def inject_css():
         unsafe_allow_html=True,
     )
 
+
 # -----------------------------
 # Database
 # -----------------------------
@@ -493,7 +498,7 @@ def load_history(limit=250):
 
 
 # -----------------------------
-# Session state
+# Session state & Callbacks
 # -----------------------------
 def init_state():
     defaults = {
@@ -509,6 +514,13 @@ def init_state():
     for key, value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = value
+
+
+def select_demo_package(name, manager):
+    """Callback to safely set session state before widgets instantiate."""
+    st.session_state.package_input = name
+    st.session_state.manager = manager
+    st.session_state.page = "Scan Package"
 
 
 # -----------------------------
@@ -633,11 +645,13 @@ def render_scan_form():
     demos = [("requests", "pip"), ("lodash", "npm"), ("express", "npm"), ("axios", "npm"), ("django", "pip")]
     for col, (name, manager) in zip(demo_cols, demos):
         with col:
-            if st.button(name, use_container_width=True, key=f"demo_{name}"):
-                st.session_state.package_input = name
-                st.session_state.manager = manager
-                st.session_state.page = "Scan Package"
-                st.rerun()
+            st.button(
+                name,
+                use_container_width=True,
+                key=f"demo_{name}",
+                on_click=select_demo_package,
+                args=(name, manager),
+            )
 
 
 def render_score(analysis, package):
@@ -815,7 +829,7 @@ def render_settings():
 
 
 # -----------------------------
-# Main
+# Main Execution
 # -----------------------------
 init_state()
 inject_css()
@@ -832,6 +846,3 @@ elif st.session_state.page == "Reports":
     render_reports()
 elif st.session_state.page == "Settings":
     render_settings()
-
-
-
