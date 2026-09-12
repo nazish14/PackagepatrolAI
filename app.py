@@ -27,8 +27,8 @@ def inject_css():
     st.markdown(
         """
         <style>
-        :root { --pp-bg:#07111f; --pp-panel:#0d1b2e; --pp-panel2:#10243b; --pp-border:#203b58;
-                --pp-blue:#38bdf8; --pp-cyan:#22d3ee; --pp-text:#edf6ff; --pp-muted:#91a6bb; }
+        :root { --pp-bg:#100B1F; --pp-panel:#1B1230; --pp-panel2:#271844; --pp-border:#B8A9D1;
+                --pp-blue:#A78BFA; --pp-cyan:#C084FC; --pp-text:#F5F3FF; --pp-muted:#91a6bb; }
         .stApp { background: radial-gradient(circle at 85% 0%, #102b47 0%, #07111f 38%, #050b14 100%); color:var(--pp-text); }
         [data-testid="stHeader"] { background:transparent; }
         [data-testid="stSidebar"] { background:#07111f; border-right:1px solid var(--pp-border); }
