@@ -10,7 +10,7 @@ from ai_analyzer import generate_ai_explanation
 from analyzer import full_scan
 from risk_engine import risk_summary
 from utils import clean_package_name, package_url, valid_package_name
-os.environ["GROQ_API_KEY"] = "your_actual_groq_api_key_here"
+
 DB_FILE = "packagepatrol.db"
 
 st.set_page_config(
